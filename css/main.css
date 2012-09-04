@@ -1,0 +1,25 @@
+.canvas {
+	position: relative;
+	background-color: #eee;
+	width: 640px;
+	height: 480px;	
+	z-index: 1;
+}
+
+.dot { 
+	color: green;
+	background-color: green;
+	width: 20px;
+	height: 20px;
+	z-index: -1;
+}
+
+
+
+.red-dot {
+	color: red;
+	background-color: red;
+	width: 20px;
+	height: 20px;
+	z-index: -2;
+}

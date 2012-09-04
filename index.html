@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dots</title>
+	<script type="text/javascript" src="js/dots.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/main.css" / >
+</head>
+<body>
+<div id="control-panel"> 
+	Transate X: <input type="text" id="txtTranslateX"value="200" />
+	Y: <input type="text" id="txtTranslateY" value="200"/>  
+	Rotate: <input type="text" id="txtRotate" value="0"/>
+	<input type="button" value="Redraw" onclick="draw()" />
+	<span id='elapsedTime'>		
+	</span>
+</div>
+<div id="canvasDiv" class="canvas">&#x2193;&#x2192;</div>
+
+<script type="text/javascript">
+
+	function draw() {
+		
+		var m1 = [ 1, 2, 3,
+				   4, 5, 6,
+				   7, 8, 9 ];
+				   
+		var m2 = [ 1, 2, 3,
+				   4, 5, 6,
+				   7, 8, 9
+				 ];
+		
+		var result = Multiply3x3(m1, m2);
+		
+		
+		var startTime = (new Date).getTime();
+		setCanvas(document.getElementById("canvasDiv"));
+		
+		// init dots
+		var buff = [ 	-100, -100,	100,-100,	100, 100,	-100, 100,
+						-80, -80,	80, -80,	80, 80,	-80, 80,
+						-60,-60,	60, -60,	60, 60,	-60, 60,
+						-40,-40,	40, -40,	40, 40,	-40, 40,
+						-20,-20,	20, -20,	20, 20,	-20, 20
+					];
+		
+		// get input
+		var rotationAngle = document.getElementById('txtRotate').value;
+		var translateX = document.getElementById('txtTranslateX').value;
+		var translateY = document.getElementById('txtTranslateY').value;
+					
+		// do transformations		
+		var rotation = getRotationCcw(rotationAngle);
+		buff = transform2D(buff, rotation)
+		
+
+		var translation  = getTranslation(translateX, translateY);		
+		buff = transform2D(buff, translation);
+		
+		// clear before drawing
+		clearCanvas();
+		
+		drawDots("dot", buff);	
+		
+		var buff2 = [-120, -120,	120,-120,	120, 120,	-120, 120];
+		buff2 = transform2D(buff2, rotation);
+		buff2 = transform2D(buff2, translation);
+		
+		drawDots("red-dot", buff2);
+		
+		var elapsedTime = ((new Date).getTime() - startTime);
+		document.getElementById('elapsedTime').innerHTML = elapsedTime + 'ms';
+	}
+	
+	// draw
+	draw();
+	
+</script>
+</body>
+</html>
