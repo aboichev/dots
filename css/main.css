@@ -1,25 +1,21 @@
 .canvas {
 	position: relative;
+    overflow: hidden;
 	background-color: #eee;
 	width: 640px;
 	height: 480px;	
-	z-index: 1;
 }
 
-.dot { 
-	color: green;
+.dot {
+    position:absolute;	
 	background-color: green;
 	width: 20px;
 	height: 20px;
-	z-index: -1;
 }
 
-
-
 .red-dot {
-	color: red;
+    position:absolute;	
 	background-color: red;
 	width: 20px;
 	height: 20px;
-	z-index: -2;
 }

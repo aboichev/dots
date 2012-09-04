@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Try Out</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    
+
+    function Multiply2D(m1, m2) {
+        var size = 3;
+        var result = [];
+        var count = 0;
+        for (k = 0; k < size; ++k) {
+            for (i = 0; i < size; ++i) {
+                var sum = 0;
+                for (j = 0; j < size; ++j) {
+                    sum += m1[k * size + j] * m2[i + j * size];
+                }
+                result[count++] = sum;
+            }
+        }
+        return result;
+    }
+
+    var m1 = [1, 0, 0,
+              0, 1, 0,
+              0, 0, 1];
+
+    var m2 = [ 1, 4, 7,
+               2, 5, 8,
+               3, 6, 9];
+
+
+    var result = Multiply2D(m1, m2);
+    for (i = 0; i < result.length; i++) {
+        document.write("M[" + i + "] = " + result[i] + ((i + 1) % 3 == 0?"<br />":"&nbsp;"));
+    }
+
+</script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 	function drawDot(className, left, top)
 	{
 		var rect = document.createElement( "div" );
-		var mystyle = 'position:absolute;top:' + top + "px; left:" + left + "px;'";
+		var mystyle = 'top:' + top + "px; left:" + left + "px;'";
 		rect.setAttribute( "class", className );
 		rect.setAttribute( "style", mystyle );
 		fragment.appendChild(rect);
@@ -57,17 +57,19 @@
 	}
 	
 	function Multiply3x3(m1, m2) {
-		var result = [9];		
-		for (i = 0; i < 3; ++i) {
-			for(j =0; j < 3; ++j) {
-				var sum = 0;
-				for(k = 0; k < 3; ++k) {
-					sum += m1[3 * j  + k] * m2[3*k + j];
-				}
-				result[i + j] = sum;
-			}						
-		}
-		return result;		
+	    var size = 3;
+	    var result = [];
+	    var count = 0;
+	    for (k = 0; k < size; ++k) {
+	        for (i = 0; i < size; ++i) {
+	            var sum = 0;
+	            for (j = 0; j < size; ++j) {
+	                sum += m2[k * size + j] * m1[i + j * size];
+	            }
+	            result[count++] = sum;
+	        }
+	    }
+	    return result;
 	}
 	
 	function transform2D(buff, matrix) {

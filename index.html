@@ -19,52 +19,35 @@
 <script type="text/javascript">
 
 	function draw() {
-		
-		var m1 = [ 1, 2, 3,
-				   4, 5, 6,
-				   7, 8, 9 ];
-				   
-		var m2 = [ 1, 2, 3,
-				   4, 5, 6,
-				   7, 8, 9
-				 ];
-		
-		var result = Multiply3x3(m1, m2);
-		
-		
+
 		var startTime = (new Date).getTime();
-		setCanvas(document.getElementById("canvasDiv"));
-		
-		// init dots
-		var buff = [ 	-100, -100,	100,-100,	100, 100,	-100, 100,
-						-80, -80,	80, -80,	80, 80,	-80, 80,
-						-60,-60,	60, -60,	60, 60,	-60, 60,
-						-40,-40,	40, -40,	40, 40,	-40, 40,
-						-20,-20,	20, -20,	20, 20,	-20, 20
-					];
+		setCanvas(document.getElementById("canvasDiv"));		
+
 		
 		// get input
 		var rotationAngle = document.getElementById('txtRotate').value;
 		var translateX = document.getElementById('txtTranslateX').value;
 		var translateY = document.getElementById('txtTranslateY').value;
 					
-		// do transformations		
-		var rotation = getRotationCcw(rotationAngle);
-		buff = transform2D(buff, rotation)
-		
-
-		var translation  = getTranslation(translateX, translateY);		
-		buff = transform2D(buff, translation);
+	    // do transformations
+		var rotation3x3 = getRotationCcw(rotationAngle);
+		var translation3x3 = getTranslation(translateX, translateY);
+		var transformation = Multiply3x3(rotation3x3, translation3x3);		      
 		
 		// clear before drawing
 		clearCanvas();
-		
-		drawDots("dot", buff);	
+
+		var buff = [-100, -100, 100, -100, 100, 100, -100, 100,
+                -80, -80, 80, -80, 80, 80, -80, 80,
+                -60, -60, 60, -60, 60, 60, -60, 60,
+                -40, -40, 40, -40, 40, 40, -40, 40,
+                -20, -20, 20, -20, 20, 20, -20, 20
+		];
+		buff = transform2D(buff, transformation);
+		drawDots("dot", buff);
 		
 		var buff2 = [-120, -120,	120,-120,	120, 120,	-120, 120];
-		buff2 = transform2D(buff2, rotation);
-		buff2 = transform2D(buff2, translation);
-		
+		buff2 = transform2D(buff2, transformation);		
 		drawDots("red-dot", buff2);
 		
 		var elapsedTime = ((new Date).getTime() - startTime);
